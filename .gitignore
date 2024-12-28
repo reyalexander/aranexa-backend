@@ -169,3 +169,18 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+.zip
+.rar
+
+.idea
+static/
+media/
+.vscode/
+# migrations only for development
+**/migrations/**
+!**/migrations
+!**/migrations/__init__.py
+prueba.py
+**/migrations/
+data.json
