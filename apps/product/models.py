@@ -1,5 +1,5 @@
 from django.db import models
-from apps.user.models import User
+from apps.user.models import Account
 from django.contrib.postgres.fields import ArrayField
 
 class Product(models.Model):
@@ -23,7 +23,7 @@ class Product(models.Model):
         (3, "No lo sé, no tengo referentes")
     )
 
-    user_id = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, verbose_name="Usuario")
+    account_id = models.ForeignKey(Account, on_delete=models.SET_NULL, null=True, verbose_name="Usuario")
     product_name = models.PositiveSmallIntegerField(
         choices=TYPE_PRODUCT_CHOICES,
         null=True,
@@ -63,5 +63,4 @@ class Product(models.Model):
     )
 
     def __str__(self):
-        return self.product_name, " ", self.product_description
-
+        return f"{self.product_name} -> {self.product_description}"

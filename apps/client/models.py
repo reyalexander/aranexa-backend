@@ -1,6 +1,6 @@
 from django.db import models
-from apps.user.models import User
-
+from apps.user.models import Account
+from django.contrib.postgres.fields import ArrayField
 
 class Client(models.Model):
     TYPE_CLIENT_CHOICES = (
@@ -16,7 +16,7 @@ class Client(models.Model):
         (3, "No estoy seguro(a)"),
     )
 
-    user_id = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, verbose_name="Usuario")
+    account_id = models.ForeignKey(Account, on_delete=models.SET_NULL, null=True, verbose_name="Usuario")
     client_type = models.PositiveSmallIntegerField(
         choices=TYPE_CLIENT_CHOICES,
         null=True,
@@ -29,8 +29,15 @@ class Client(models.Model):
         blank=True,
         verbose_name="¿Conozco quién es mi público objetivo más importante?"
     )
-    recommendations = models.JSONField(
+    recommendations = ArrayField(
+        models.TextField(),
+        size=10,
+        null=True,
         blank=True, 
-        null=True, 
         verbose_name="Busco recomendaciones o sugerencias mediante"
     )
+
+    def __str__(self):
+        if self.client_type is None:
+            return f"Client Type #{self.client_type}"
+        return f"Client {self.id}"

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Resumen de Usuario</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    h1, h2 {
+      color: #4a90e2;
+      margin-bottom: 10px;
+    }
+    h2 {
+      border-bottom: 2px solid #d3d3d3;
+      padding-bottom: 5px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    th, td {
+      border: 1px solid #d3d3d3;
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background-color: #f5f5f5;
+    }
+    .section {
+      margin-bottom: 30px;
+    }
+    .title {
+      font-size: 18px;
+      margin-bottom: 5px;
+    }
+    .subtitle {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 15px;
+    }
+    .container {
+      border: 1px solid #d3d3d3;
+      padding: 15px;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+    }
+  </style>
+</head>
+<body>
+  <h1>Resumen de Usuario</h1>
+
+  <div class="section">
+    <h2>Información Personal</h2>
+    <table>
+      <tr>
+        <th>Nombre Completo</th>
+        <td>{{ account.full_name }}</td>
+      </tr>
+      <tr>
+        <th>Año de Nacimiento</th>
+        <td>{{ account.year_birthday }}</td>
+      </tr>
+      <tr>
+        <th>Género</th>
+        <td>{{ account.get_gender_display }}</td>
+      </tr>
+      <tr>
+        <th>Nivel de Estudio</th>
+        <td>{{ account.get_level_of_study_display }}</td>
+      </tr>
+    </table>
+  </div>
+
+  {% if account.companyinformation_set.exists %}
+  <div class="section">
+    <h2>Información de la Empresa</h2>
+    {% for company in account.companyinformation_set.all %}
+    <div class="container">
+      <p><strong>Año de Fundación:</strong> {{ company.year_foundation }}</p>
+      <p><strong>Mercado:</strong> {{ company.market|join:", " }}</p>
+      <p><strong>Retos Principales:</strong> {{ company.main_challenges|join:", " }}</p>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if account.companybrand_set.exists %}
+  <div class="section">
+    <h2>Información de la Marca</h2>
+    {% for brand in account.companybrand_set.all %}
+    <div class="container">
+      <p><strong>Nombre Comercial:</strong> {{ brand.brand_information }}</p>
+      <p><strong>Presencia en Medios:</strong> {{ brand.currently_present_media|join:", " }}</p>
+      <p><strong>Metas:</strong> {{ brand.goals_achieve|join:", " }}</p>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if account.client_set.exists %}
+  <div class="section">
+    <h2>Clientes</h2>
+    {% for client in account.client_set.all %}
+    <div class="container">
+      <p><strong>Tipo de Cliente:</strong> {{ client.get_client_type_display }}</p>
+      <p><strong>Público Objetivo:</strong> {{ client.get_target_audience_display }}</p>
+      <p><strong>Recomendaciones:</strong> {{ client.recommendations|join:", " }}</p>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if account.product_set.exists %}
+  <div class="section">
+    <h2>Productos o Servicios</h2>
+    {% for product in account.product_set.all %}
+    <div class="container">
+      <p><strong>Nombre:</strong> {{ product.get_product_name_display }}</p>
+      <p><strong>Descripción:</strong> {{ product.product_description }}</p>
+      <p><strong>Inversión:</strong> {{ product.product_invest|join:", " }}</p>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+</body>
+</html>
