@@ -117,6 +117,9 @@ DATABASES = {
         "PASSWORD": "admin123",
         "HOST": "aranexadb.cf422smws2p3.us-east-2.rds.amazonaws.com",
         "PORT": "5432",
+        'OPTIONS': {
+            'connect_timeout': 90,  # Tiempo de espera en segundos (puedes aumentarlo más si es necesario)
+        },
     }
 }
 
