@@ -115,7 +115,7 @@ DATABASES = {
         "NAME": "aranexadb",
         "USER": "postgres",
         "PASSWORD": "admin123",
-        "HOST": "localhost",
+        "HOST": "aranexadb.cf422smws2p3.us-east-2.rds.amazonaws.com",
         "PORT": "5432",
     }
 }
