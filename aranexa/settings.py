@@ -117,9 +117,6 @@ DATABASES = {
         "PASSWORD": "admin123",
         "HOST": "localhost",
         "PORT": "5432",
-        'OPTIONS': {
-            'connect_timeout': 90,  # Tiempo de espera en segundos (puedes aumentarlo más si es necesario)
-        },
     }
 }
 
