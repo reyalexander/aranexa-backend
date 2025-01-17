@@ -13,11 +13,14 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 import environ
 
-# Inicializa django-environ
-env = environ.Env()
+import environ
 
-# Lee el archivo .env
-environ.Env.read_env('.env')
+env = environ.Env()
+environ.Env.read_env(env_file='.env')  # Esto carga las variables del archivo .env
+
+AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
+DEBUG = env.bool('DEBUG', default=False)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -29,8 +32,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-4mwgb7ehgsc3s@^2wysz=am6r@$zt((d9k^e8$ftf(f!w&%q+3'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
 ALLOWED_HOSTS = ['3.133.157.177', 'localhost', '127.0.0.1']
 
