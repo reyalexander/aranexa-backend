@@ -18,8 +18,6 @@ import environ
 env = environ.Env()
 environ.Env.read_env(env_file='.env')  # Esto carga las variables del archivo .env
 
-AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
 DEBUG = env.bool('DEBUG', default=False)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
